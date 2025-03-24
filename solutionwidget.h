@@ -18,6 +18,10 @@ public:
     explicit SolutionWidget(QWidget *parent = nullptr);
     ~SolutionWidget();
 
+signals:
+    void planetsChanged(const QList<Planet>& newPlanets);
+    void rocketChanged(Rocket* newRocket);
+
 public slots:
     void setPlanets(const QList<Planet>& newPlanets);
     void setRocket(Rocket* newRocket);

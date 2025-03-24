@@ -6,6 +6,9 @@ SolutionWidget::SolutionWidget(QWidget *parent)
     , ui(new Ui::SolutionWidget)
 {
     ui->setupUi(this);
+
+    connect(this, &SolutionWidget::planetsChanged,
+            ui->stageOneTab, &EscapeVelocitiesSolutionWidget::setPlanets);
 }
 
 SolutionWidget::~SolutionWidget()
@@ -14,19 +17,11 @@ SolutionWidget::~SolutionWidget()
 }
 
 void SolutionWidget::setPlanets(const QList<Planet>& newPlanets) {
-    QStringList planetNames;
-
-    for (int i = 0; i < newPlanets.length(); ++i) {
-        planetNames.append(newPlanets[i].getName());
-    }
-
-    QString planetNamesString = planetNames.join(", ");
-    ui->planetsField->setText(planetNamesString);
+    // Forward signal
+    emit planetsChanged(newPlanets);
 }
 
-void SolutionWidget::setRocket(Rocket* rocket) {
-    QString rocketEnginesString = QString("%1 x %2 m/s^2")
-                                      .arg(rocket->getNumberOfEngines(),
-                                           rocket->getAccelerationPerEngineInMetresPerSecondSquare());
-    ui->rocketField->setText(rocketEnginesString);
+void SolutionWidget::setRocket(Rocket* newRocket) {
+    // Forward signal
+    emit rocketChanged(newRocket);
 }
