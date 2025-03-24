@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Space Challenge</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="layoutDirection">
+    <enum>Qt::LayoutDirection::LeftToRight</enum>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,1">
+    <item>
+     <widget class="SolutionWidget" name="solutionWidget" native="true"/>
+    </item>
+    <item>
+     <widget class="QWidget" name="dataWidget" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1">
+       <item>
+        <widget class="PlanetsWidget" name="planetsWidget" native="true"/>
+       </item>
+       <item>
+        <widget class="RocketWidget" name="rocketWidget" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlanetsWidget</class>
+   <extends>QWidget</extends>
+   <header>planetswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RocketWidget</class>
+   <extends>QWidget</extends>
+   <header>rocketwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SolutionWidget</class>
+   <extends>QWidget</extends>
+   <header>solutionwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
