@@ -20,6 +20,7 @@ PlanetsWidget::PlanetsWidget(QWidget *parent)
 
 PlanetsWidget::~PlanetsWidget()
 {
+    delete planetTableModel;
     delete ui;
 }
 

@@ -19,11 +19,16 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QLabel" name="rocketHeading">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Rocket&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Rocket</string>
         </property>
         <property name="textFormat">
-         <enum>Qt::TextFormat::RichText</enum>
+         <enum>Qt::TextFormat::AutoText</enum>
         </property>
        </widget>
       </item>
@@ -60,31 +65,45 @@ Select a file to load rocket data from.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="rocketDisplayPage">
-      <layout class="QFormLayout" name="formLayout">
+      <layout class="QGridLayout" name="gridLayout" columnstretch="0,0">
+       <item row="1" column="1">
+        <widget class="QLabel" name="rocketAccelerationPerEngineField">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>%d m/s²</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="rocketNumberOfEnginesLabel">
          <property name="font">
           <font>
-           <pointsize>10</pointsize>
-           <bold>true</bold>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
           <string>Number of engines:</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
         <widget class="QLabel" name="rocketNumberOfEnginesField">
-         <property name="text">
-          <string>TextLabel</string>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+           <bold>true</bold>
+          </font>
          </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="rocketAccelerationPerEngineField">
          <property name="text">
-          <string>TextLabel</string>
+          <string>%d</string>
          </property>
         </widget>
        </item>
@@ -92,11 +111,14 @@ Select a file to load rocket data from.</string>
         <widget class="QLabel" name="rocketAccelerationPerEngineLabel">
          <property name="font">
           <font>
-           <bold>true</bold>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Acceleration per engine (m/s²):</string>
+          <string>Acceleration per engine:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>

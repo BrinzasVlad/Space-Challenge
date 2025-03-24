@@ -102,7 +102,9 @@ void RocketWidget::updateRocketDisplay(Rocket* newRocket) {
     }
     else {
         ui->rocketNumberOfEnginesField->setText(QString::number(newRocket->getNumberOfEngines()));
-        ui->rocketAccelerationPerEngineField->setText(QString::number(newRocket->getAccelerationPerEngineInMetresPerSecondSquare()));
+        ui->rocketAccelerationPerEngineField->setText(
+            QString("%1 m/s²").arg(newRocket->getAccelerationPerEngineInMetresPerSecondSquare())
+        );
 
         ui->stackedWidget->setCurrentIndex(1);
     }
