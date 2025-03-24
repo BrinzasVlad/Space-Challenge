@@ -23,12 +23,73 @@
     </item>
     <item>
      <widget class="QWidget" name="dataWidget" native="true">
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,2,1">
        <item>
-        <widget class="PlanetsWidget" name="planetsWidget" native="true"/>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>23</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
-        <widget class="RocketWidget" name="rocketWidget" native="true"/>
+        <widget class="QFrame" name="planetWidgetFrame">
+         <property name="frameShape">
+          <enum>QFrame::Shape::Panel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="PlanetsWidget" name="planetsWidget" native="true"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="rocketWidgetFrame">
+         <property name="frameShape">
+          <enum>QFrame::Shape::Panel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="RocketWidget" name="rocketWidget" native="true"/>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
