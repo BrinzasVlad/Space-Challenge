@@ -1,6 +1,7 @@
 #include "planetswidget.h"
 #include "ui_planetswidget.h"
 #include "dialogutils.h"
+#include "measurementunits.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -24,36 +25,12 @@ PlanetsWidget::~PlanetsWidget()
     delete ui;
 }
 
-enum class DistanceUnit {
-    Metres,
-    Kilometres,
-    Invalid
-};
-DistanceUnit parseDistanceUnit(const QString& string) {
-    if (string.toLower() == "m") return DistanceUnit::Metres;
-    if (string.toLower() == "km") return DistanceUnit::Kilometres;
-    return DistanceUnit::Invalid;
-}
-
-enum class MassUnit {
-    Kilograms,
-    Tonnes,
-    Earths,
-    Invalid
-};
-MassUnit parseMassUnit(const QString& string) {
-    if (string.toLower() == "kg") return MassUnit::Kilograms;
-    if (string.toLower() == "t") return MassUnit::Tonnes;
-    if (string.toLower() == "earths") return MassUnit::Earths;
-    return MassUnit::Invalid;
-}
-
 struct PlanetData {
     QString name;
     double diameter;
-    DistanceUnit diameterUnit;
+    DistanceUnit diameterUnit = DistanceUnit::INVALID;
     double mass;
-    MassUnit massUnit;
+    MassUnit massUnit = MassUnit::INVALID;
 };
 
 QList<PlanetData> readPlanetData(const QString& planetFileName) { // TODO: warn caller if invalid data (hence no reading)
@@ -95,8 +72,8 @@ QList<PlanetData> readPlanetData(const QString& planetFileName) { // TODO: warn 
                 planetData.diameter = diameterMatch.captured(1).toDouble(&okConversion);
                 if (!okConversion) errors.append(QString("Invalid diameter value '%1'").arg(diameterMatch.captured(1)));
 
-                planetData.diameterUnit = parseDistanceUnit(diameterMatch.captured(2));
-                if (DistanceUnit::Invalid == planetData.diameterUnit) {
+                planetData.diameterUnit = DistanceUnit::parse(diameterMatch.captured(2));
+                if (DistanceUnit::INVALID == planetData.diameterUnit) {
                     errors.append(QString("Invalid distance unit '%1' in line '%2'; expected 'km' or 'm'")
                                       .arg(diameterMatch.captured(2), line));
                 }
@@ -111,6 +88,7 @@ QList<PlanetData> readPlanetData(const QString& planetFileName) { // TODO: warn 
                 errors.append(QString("No mass specified in line '%1'; use format 'mass = <value> <kg|t|Earths>'").arg(line));
             }
             else {
+                // FIXME: currently, mass regex fails on exponent-only mass, like "10^26 kg"
                 // TODO: maybe switch to capturing mass in two steps?
                 // e.g. catch "6 * 10 ^ 24" wholesale first, then break that down into "6" base and "24" exponent
                 bool okConversion;
@@ -128,8 +106,8 @@ QList<PlanetData> readPlanetData(const QString& planetFileName) { // TODO: warn 
                                           .arg(massMatch.captured(1), line));
                 }
 
-                planetData.massUnit = parseMassUnit(massMatch.captured(3));
-                if (MassUnit::Invalid == planetData.massUnit) {
+                planetData.massUnit = MassUnit::parse(massMatch.captured(3));
+                if (MassUnit::INVALID == planetData.massUnit) {
                     errors.append(QString("Invalid mass unit '%1' in line '%2'; expected 'kg' or 't' or 'Earths'")
                                       .arg(massMatch.captured(3), line));
                 }
@@ -170,20 +148,23 @@ QList<Planet> processPlanetData(const QList<PlanetData>& planetDataList) {
         double radiusInMetres, massInKilograms;
 
         // Compute radius
-        radiusInMetres = planetDataEntry.diameter / 2.0;
-        if (planetDataEntry.diameterUnit == DistanceUnit::Kilometres) radiusInMetres *= 1000.0;
+        radiusInMetres = DistanceUnit::convert(planetDataEntry.diameter / 2.0, planetDataEntry.diameterUnit, DistanceUnit::METRES);
 
         // Compute mass
-        massInKilograms = planetDataEntry.mass;
-        if (planetDataEntry.massUnit == MassUnit::Tonnes) massInKilograms *= 1000.0;
-        if (planetDataEntry.massUnit == MassUnit::Earths) {
-            if (!earthFound) DialogUtils::showError(
-                    QString("Planet '%1' uses mass unit 'Earths' but Earth was not defined").arg(planetDataEntry.name)
-                    );
-            else massInKilograms *= earthMass;
-        }
+        if (planetDataEntry.massUnit == MassUnit::EARTHS) {
+            // Handle Earth separately
 
-        // TODO: should conversion from one unit to another generally be handled by the unit class?
+            if (!earthFound) {
+                DialogUtils::showError(
+                    QString("Planet '%1' uses mass unit 'Earths' but Earth was not defined").arg(planetDataEntry.name)
+                );
+                continue; // Skip entry since it has invalid mass
+            }
+            else massInKilograms = planetDataEntry.mass * earthMass;
+        }
+        else {
+            massInKilograms = MassUnit::convert(planetDataEntry.mass, planetDataEntry.massUnit, MassUnit::KILOGRAMS);
+        }
 
         planets.append(Planet(planetDataEntry.name, massInKilograms, radiusInMetres));
     }

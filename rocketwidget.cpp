@@ -1,6 +1,7 @@
 #include "rocketwidget.h"
 #include "ui_rocketwidget.h"
 #include "dialogutils.h"
+#include "measurementunits.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -17,17 +18,6 @@ RocketWidget::~RocketWidget()
 {
     delete ui;
     if (nullptr != rocket) delete rocket;
-}
-
-enum class AccelerationUnit {
-    MetresPerSecondSquare,
-    KilometresPerSecondSquare,
-    Invalid
-};
-AccelerationUnit parseAccelerationUnit(const QString& string) {
-    if (string.toLower() == "m/s^2" || string.toLower() == "m/s²") return AccelerationUnit::MetresPerSecondSquare;
-    if (string.toLower() == "km/s^2" || string.toLower() == "km/s²") return AccelerationUnit::KilometresPerSecondSquare;
-    return AccelerationUnit::Invalid;
 }
 
 void RocketWidget::on_readRocketButton_clicked()
@@ -69,24 +59,32 @@ void RocketWidget::on_readRocketButton_clicked()
         }
         else {
             bool okConversion;
-            rocketAccelerationPerEngineInMetresPerSecondSquare = accelerationPerEngineMatch.captured(1).toDouble(&okConversion);
+            double rocketAccelerationValue = accelerationPerEngineMatch.captured(1).toDouble(&okConversion);
             if (!okConversion) {
                 errors.append(QString("Invalid acceleration per engine value '%1'").arg(accelerationPerEngineMatch.captured(1)));
             }
 
-            AccelerationUnit accelerationPerEngineUnit = parseAccelerationUnit(accelerationPerEngineMatch.captured(2));
-            if (AccelerationUnit::Invalid == accelerationPerEngineUnit) {
+            AccelerationUnit accelerationPerEngineUnit = AccelerationUnit::parse(accelerationPerEngineMatch.captured(2));
+            if (AccelerationUnit::INVALID == accelerationPerEngineUnit) {
                 errors.append(QString("Invalid acceleration unit '%1'; expected 'm/s^2' or 'km/s^2'"));
             }
-            if (AccelerationUnit::KilometresPerSecondSquare == accelerationPerEngineUnit) {
-                rocketAccelerationPerEngineInMetresPerSecondSquare *= 1000.0;
-            }
+            rocketAccelerationPerEngineInMetresPerSecondSquare = AccelerationUnit::convert(
+                    rocketAccelerationValue,
+                    accelerationPerEngineUnit,
+                    AccelerationUnit::METERS_PER_SECOND_SQUARE
+                );
         }
 
         if (!errors.empty()) DialogUtils::showError(errors.join('\n'));
         else {
+            // Replace rocket
+            if (nullptr != rocket) delete rocket;
             rocket = new Rocket(rocketNumberOfEngines, rocketAccelerationPerEngineInMetresPerSecondSquare);
+
+            // Update display
             updateRocketDisplay(rocket);
+
+            // Emit signal
             emit rocketChanged(rocket);
         }
 
