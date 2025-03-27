@@ -9,6 +9,11 @@ SolutionWidget::SolutionWidget(QWidget *parent)
 
     connect(this, &SolutionWidget::planetsChanged,
             ui->stageOneTab, &EscapeVelocitiesSolutionWidget::setPlanets);
+
+    connect(this, &SolutionWidget::planetsChanged,
+            ui->stageTwoTab, &RocketAccelerationTimeSolutionWidget::setPlanets);
+    connect(this, &SolutionWidget::rocketChanged,
+            ui->stageTwoTab, &RocketAccelerationTimeSolutionWidget::setRocket);
 }
 
 SolutionWidget::~SolutionWidget()
@@ -21,7 +26,7 @@ void SolutionWidget::setPlanets(const QList<Planet>& newPlanets) {
     emit planetsChanged(newPlanets);
 }
 
-void SolutionWidget::setRocket(Rocket* newRocket) {
+void SolutionWidget::setRocket(const Rocket* newRocket) {
     // Forward signal
     emit rocketChanged(newRocket);
 }

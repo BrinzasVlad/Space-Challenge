@@ -16,14 +16,17 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="EscapeVelocitiesSolutionWidget" name="stageOneTab">
       <attribute name="title">
        <string>Stage One</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tab_2">
+     <widget class="RocketAccelerationTimeSolutionWidget" name="stageTwoTab">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>Stage Two</string>
       </attribute>
      </widget>
     </widget>
@@ -35,6 +38,12 @@
    <class>EscapeVelocitiesSolutionWidget</class>
    <extends>QWidget</extends>
    <header>escapevelocitiessolutionwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RocketAccelerationTimeSolutionWidget</class>
+   <extends>QWidget</extends>
+   <header>rocketaccelerationtimesolutionwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

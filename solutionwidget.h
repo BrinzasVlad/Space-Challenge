@@ -20,11 +20,11 @@ public:
 
 signals:
     void planetsChanged(const QList<Planet>& newPlanets);
-    void rocketChanged(Rocket* newRocket);
+    void rocketChanged(const Rocket* newRocket);
 
 public slots:
     void setPlanets(const QList<Planet>& newPlanets);
-    void setRocket(Rocket* newRocket);
+    void setRocket(const Rocket* newRocket);
 
 private:
     Ui::SolutionWidget *ui;

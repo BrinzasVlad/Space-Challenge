@@ -20,19 +20,6 @@ EscapeVelocitiesSolutionWidget::~EscapeVelocitiesSolutionWidget()
     delete ui;
 }
 
-namespace {
-    // Helper functions for here
-
-    double computeEscapeVelocity(const Planet& planet) {
-        static const double gravitationalConstant = 6.67e-11; // m³/kg*s²
-
-        // Apply formula; be careful to use SI units
-        double escapeVelocity = sqrt(2 * gravitationalConstant * planet.getMassInKilograms() / planet.getRadiusInMetres());
-
-        return escapeVelocity;
-    }
-}
-
 void EscapeVelocitiesSolutionWidget::setPlanets(const QList<Planet>& newPlanets) {
     // We could store the data if needed, but we don't do anything with it aside display this table
 
@@ -44,10 +31,11 @@ void EscapeVelocitiesSolutionWidget::setPlanets(const QList<Planet>& newPlanets)
     // Populate table
     for (int i = 0; i < newPlanets.length(); ++i) {
         const Planet& planet = newPlanets[i];
+
         escapeVelocitiesTableModel->setData(escapeVelocitiesTableModel->index(i, 0),
                                             planet.getName());
         escapeVelocitiesTableModel->setData(escapeVelocitiesTableModel->index(i, 1),
-                                            QString("%1 m/s").arg(computeEscapeVelocity(planet)));
+                                            QString("%1 m/s").arg(planet.getEscapeVelocityInMetresPerSecond()));
     }
 
     // Hide or display table as needed
