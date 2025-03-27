@@ -23,14 +23,6 @@ RocketAccelerationTimeSolutionWidget::~RocketAccelerationTimeSolutionWidget()
 }
 
 namespace {
-    double computeTimeToEscapeVelocity(const Rocket& rocket, const Planet& planet) {
-        double escapeVelocity = planet.getEscapeVelocityInMetresPerSecond();
-        double rocketAcceleration = rocket.getNumberOfEngines() * rocket.getAccelerationPerEngineInMetresPerSecondSquare();
-
-        // We have v = at, so t = v/a
-        return escapeVelocity / rocketAcceleration;
-    }
-
     double computeDistance(const double initialVelocity, const double acceleration, const double time) {
         // We have d = vt + at²/2
         return initialVelocity * time + acceleration * time * time / 2;
@@ -58,7 +50,8 @@ void RocketAccelerationTimeSolutionWidget::updateRocketAccelerationTimeTable() {
 
         // Populate table
         for (int i = 0; i < planets->length(); ++i) {
-            double rocketTimeToEscapeVelocity = computeTimeToEscapeVelocity(*rocket, (*planets)[i]);
+            double rocketTimeToEscapeVelocity = rocket->timeToReachTargetSpeed((*planets)[i].getEscapeVelocityInMetresPerSecond());
+
             double rocketAcceleration = rocket->getNumberOfEngines() * rocket->getAccelerationPerEngineInMetresPerSecondSquare();
             double rocketDistanceToEscapeVelocity = computeDistance(0, rocketAcceleration, rocketTimeToEscapeVelocity);
 
