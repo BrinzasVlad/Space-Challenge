@@ -29,6 +29,26 @@
        <string>Stage Two</string>
       </attribute>
      </widget>
+     <widget class="QWidget" name="stageThreeTab">
+      <attribute name="title">
+       <string>Stage Three</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="stageFourTab">
+      <attribute name="title">
+       <string>Stage Four</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="stageFiveTab">
+      <attribute name="title">
+       <string>Stage Five</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="stageSixTab">
+      <attribute name="title">
+       <string>Stage Six</string>
+      </attribute>
+     </widget>
     </widget>
    </item>
   </layout>
