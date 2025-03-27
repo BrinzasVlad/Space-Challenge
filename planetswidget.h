@@ -23,13 +23,14 @@ signals:
 
 private slots:
     void on_readPlanetsButton_clicked();
+    void on_readOrbitalDataButton_clicked();
 
 private:
     Ui::PlanetsWidget *ui;
     QList<Planet> planets;
     QStandardItemModel* planetTableModel;
 
-    void updatePlanetsTable(QList<Planet> newPlanets);
+    void updatePlanetsTable(QList<Planet> newPlanets, bool haveOrbitalData = false);
 };
 
 #endif // PLANETSWIDGET_H

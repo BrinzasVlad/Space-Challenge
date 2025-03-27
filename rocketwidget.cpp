@@ -23,7 +23,6 @@ RocketWidget::~RocketWidget()
 void RocketWidget::on_readRocketButton_clicked()
 {
     // Open a file-picker dialog to fetch rocket data from a file
-    // TODO: start from a more reasonable location maybe?
     QString rocketFileName = QFileDialog::getOpenFileName(this, tr("Select a rocket data file"));
 
     QFile rocketFile(rocketFileName);

@@ -17,7 +17,7 @@
    <property name="layoutDirection">
     <enum>Qt::LayoutDirection::LeftToRight</enum>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,1">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,2">
     <item>
      <widget class="SolutionWidget" name="solutionWidget" native="true"/>
     </item>

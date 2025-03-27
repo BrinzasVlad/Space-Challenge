@@ -30,6 +30,8 @@
        </widget>
       </item>
       <item>
+       <layout class="QVBoxLayout" name="buttonsLayout">
+        <item>
          <widget class="QPushButton" name="readPlanetsButton">
           <property name="font">
            <font>
@@ -40,6 +42,20 @@
            <string>Read from file</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="readOrbitalDataButton">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Read orbital data</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

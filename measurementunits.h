@@ -106,4 +106,18 @@ public:
     static std::vector<AccelerationUnit> allValues();
 };
 
+
+class TimeUnit : public UnitType<TimeUnit> {
+private:
+    TimeUnit(QString name, QString abbreviation, double ratioToSeconds);
+    friend class UnitType<TimeUnit>; // Needed to allow UnitType to define INVALID
+
+public:
+    static const TimeUnit SECONDS;
+    static const TimeUnit HOURS;
+    static const TimeUnit DAYS;
+    static const TimeUnit YEARS;
+    static std::vector<TimeUnit> allValues();
+};
+
 #endif // MEASUREMENTUNITS_H

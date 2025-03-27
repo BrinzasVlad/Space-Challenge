@@ -5,6 +5,11 @@ Planet::Planet(const QString& name, double massInKilograms, double radiusInMetre
     , massInKilograms(massInKilograms)
     , radiusInMetres(radiusInMetres) {}
 
+void Planet::setOrbitalCharacteristics(double orbitalPeriodInDays, double orbitalRadiusInAU) {
+    this->orbitalPeriodInDays = orbitalPeriodInDays;
+    this->orbitalRadiusInAU = orbitalRadiusInAU;
+}
+
 QString Planet::getName() const {
     return name;
 }
@@ -15,4 +20,12 @@ double Planet::getMassInKilograms() const {
 
 double Planet::getRadiusInMetres() const {
     return radiusInMetres;
+}
+
+std::optional<double> Planet::getOrbitalPeriodInDays() const {
+    return orbitalPeriodInDays;
+}
+
+std::optional<double> Planet::getOrbitalRadiusInAU() const {
+    return orbitalRadiusInAU;
 }

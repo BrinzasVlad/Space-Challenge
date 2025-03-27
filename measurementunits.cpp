@@ -47,3 +47,19 @@ std::vector<AccelerationUnit> AccelerationUnit::allValues() {
         AccelerationUnit::KILOMETERS_PER_SECOND_SQUARE
     });
 }
+
+TimeUnit::TimeUnit(QString name, QString abbreviation, double ratioToSeconds):
+    UnitType<TimeUnit>(name, abbreviation, ratioToSeconds)
+{}
+const TimeUnit TimeUnit::SECONDS("Seconds", "s", 1.0);
+const TimeUnit TimeUnit::HOURS("Hours", "h", 3600.0);
+const TimeUnit TimeUnit::DAYS("Days", "d", 86400.0);
+const TimeUnit TimeUnit::YEARS("Years", "y", 31556952.0); // Assuming 365.2425 days per year to account for leap years
+std::vector<TimeUnit> TimeUnit::allValues() {
+    return std::vector<TimeUnit>({
+        TimeUnit::SECONDS,
+        TimeUnit::HOURS,
+        TimeUnit::DAYS,
+        TimeUnit::YEARS
+    });
+}
