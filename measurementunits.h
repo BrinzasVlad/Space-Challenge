@@ -42,19 +42,19 @@ public:
     static DerivedUnit parse(const QString& string, const std::vector<DerivedUnit>& acceptedUnits = DerivedUnit::allValues()) {
         // Try abbreviations
         for (DerivedUnit unit : acceptedUnits) {
-            if (0 == string.compare(unit._abbreviation), Qt::CaseInsensitive) return unit;
+            if (0 == string.compare(unit._abbreviation, Qt::CaseInsensitive)) return unit;
         }
 
         // Try names
         for (DerivedUnit unit : acceptedUnits) {
-            if (0 == string.compare(unit._name), Qt::CaseInsensitive) return unit;
+            if (0 == string.compare(unit._name, Qt::CaseInsensitive)) return unit;
         }
 
         // Extra: if above failed, try replacing ^2 and ^3 with superscript ² and ³ and checking abbreviations again
         QString stringWithReplacements(string);
         stringWithReplacements.replace("^2", "²").replace("^3", "³");
         for (DerivedUnit unit : acceptedUnits) {
-            if (0 == stringWithReplacements.compare(unit._abbreviation), Qt::CaseInsensitive) return unit;
+            if (0 == stringWithReplacements.compare(unit._abbreviation, Qt::CaseInsensitive)) return unit;
         }
 
         // If nothing matched, return invalid
