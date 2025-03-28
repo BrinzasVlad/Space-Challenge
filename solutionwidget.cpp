@@ -14,6 +14,11 @@ SolutionWidget::SolutionWidget(QWidget *parent)
             ui->stageTwoTab, &RocketAccelerationTimeSolutionWidget::setPlanets);
     connect(this, &SolutionWidget::rocketChanged,
             ui->stageTwoTab, &RocketAccelerationTimeSolutionWidget::setRocket);
+
+    connect(this, &SolutionWidget::planetsChanged,
+            ui->stageThreeTab, &SimplifiedStraightJourneySolutionWidget::setPlanets);
+    connect(this, &SolutionWidget::rocketChanged,
+            ui->stageThreeTab, &SimplifiedStraightJourneySolutionWidget::setRocket);
 }
 
 SolutionWidget::~SolutionWidget()

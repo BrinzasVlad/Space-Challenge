@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::RocketWidget *ui;
-    Rocket* rocket;
+    Rocket* rocket = nullptr;
 
     void updateRocketDisplay(Rocket* newRocket);
 };

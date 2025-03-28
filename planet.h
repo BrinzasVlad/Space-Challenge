@@ -14,6 +14,7 @@ public:
     double getEscapeVelocityInMetresPerSecond() const;
     std::optional<double> getOrbitalPeriodInDays() const;
     std::optional<double> getOrbitalRadiusInAU() const;
+    bool hasOrbitalData() const;
 
 private:
     QString name;

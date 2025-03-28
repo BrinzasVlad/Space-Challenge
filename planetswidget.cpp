@@ -329,8 +329,8 @@ void PlanetsWidget::on_readOrbitalDataButton_clicked()
     // Update table, with orbital data flag
     updatePlanetsTable(planets, true);
 
-    // Emit change signal; if we're using a new one, make sure base button emits it (with empty list) too
-    // TODO: do this!
+    // Emit change signal
+    emit planetsChanged(planets); // TODO: should we have a different signal for this?
 }
 
 void PlanetsWidget::updatePlanetsTable(QList<Planet> newPlanets, bool haveOrbitalData) {

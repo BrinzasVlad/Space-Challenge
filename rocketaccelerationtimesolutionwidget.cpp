@@ -40,7 +40,7 @@ void RocketAccelerationTimeSolutionWidget::setRocket(const Rocket* newRocket) {
 }
 
 void RocketAccelerationTimeSolutionWidget::updateRocketAccelerationTimeTable() {
-    if (nullptr != rocket && !planets->empty()) {
+    if (nullptr != rocket && nullptr != planets && !planets->empty()) {
         // Clear table, re-set-up header row
         rocketAccelerationTimeTableModel->clear();
         rocketAccelerationTimeTableModel->setHorizontalHeaderLabels(

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SimplifiedStraightJourneySolutionWidget</class>
+ <widget class="QWidget" name="SimplifiedStraightJourneySolutionWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>820</width>
+    <height>660</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="SimplifiedStraightJourneyHeader">
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Stage Three - The fun begins</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QWidget" name="noDataPage">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="noDataLabel">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>No planet/rocket data loaded.
+Please use the side panel to load some data first.</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="simplifiedStraightJourneyPage">
+      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,1">
+       <item>
+        <widget class="QFrame" name="planetChooserFrame">
+         <property name="font">
+          <font>
+           <pointsize>6</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#planetChooserFrame {
+	border-top: 2px solid lightgrey;
+	border-left: 2px solid lightgrey;
+	border-right: 2px solid darkgrey;
+	border-bottom: 2px solid darkgrey;
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,5,1,5">
+          <item>
+           <widget class="QLabel" name="fromPlanetLabel">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>From:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="fromPlanetSelect">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="editable">
+             <bool>false</bool>
+            </property>
+            <property name="placeholderText">
+             <string>Select origin planet...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="toPlanetLabel">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>To:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="toPlanetSelect">
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="placeholderText">
+             <string>Select destination planet...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="resultsStackedWidget">
+         <widget class="QWidget" name="resultsIssuePage">
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="resultsIssueLabel">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Issue: {issueText}.
+Please {issueSolutionText} to continue.</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="resultsDisplayPage">
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QScrollArea" name="scrollArea">
+             <property name="styleSheet">
+              <string notr="true">background-color: transparent;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Shape::NoFrame</enum>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>776</width>
+                <height>508</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>11</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>11</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="resultsDisplayLabel">
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>When travelling from &lt;b&gt;{fromPlanet}&lt;/b&gt; to &lt;b&gt;{toPlanet}&lt;/b&gt; using a simplified straight-line model, we get the following statistics:
+- Distance between planets (at closest approach): &lt;b&gt;{closestDistance} AU&lt;/b&gt;
+- Cruising velocity: &lt;b&gt;{cruisingVelocityM/S} m/s&lt;/b&gt; ({cruisingVelocityKm/S} km/s)
+- Time to reach cruising velocity: &lt;b&gt;{accelerationTime} s&lt;/b&gt;
+- Distance from {fromPlanet} surface when reaching cruising velocity: &lt;b&gt;{accelerationDistance} km&lt;/b&gt;
+- Time cruising at nominal velocity: &lt;b&gt;{cruisingTime} s&lt;/b&gt; ({cruisingTimeFormatted})
+- Distance from {toPlanet} surface when starting deceleration burn: &lt;b&gt;{decelerationDistance} km&lt;/b&gt;
+- Time to decelerate to 0 velocity onto {toPlanet} surface: &lt;b&gt;{decelerationTime} s&lt;/b&gt;
+- Total travel time: &lt;b&gt;{totalJourneyTime} s&lt;/b&gt; ({totalJourneyTimeFormatted})</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::TextFormat::MarkdownText</enum>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

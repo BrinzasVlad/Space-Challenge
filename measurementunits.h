@@ -114,10 +114,25 @@ private:
 
 public:
     static const TimeUnit SECONDS;
+    static const TimeUnit MINUTES;
     static const TimeUnit HOURS;
     static const TimeUnit DAYS;
     static const TimeUnit YEARS;
     static std::vector<TimeUnit> allValues();
+};
+
+
+class SpeedUnit : public UnitType<SpeedUnit> {
+private:
+    SpeedUnit(QString name, QString abbreviation, double ratioToMetresPerSecond);
+    friend class UnitType<SpeedUnit>; // Needed to allow UnitType to define INVALID
+
+public:
+    static const SpeedUnit METRES_PER_SECOND;
+    static const SpeedUnit KILOMETRES_PER_HOUR;
+    static const SpeedUnit MILES_PER_HOUR;
+    static const SpeedUnit KILOMETRES_PER_SECOND;
+    static std::vector<SpeedUnit> allValues();
 };
 
 #endif // MEASUREMENTUNITS_H

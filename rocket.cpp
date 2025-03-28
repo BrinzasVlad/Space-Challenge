@@ -12,6 +12,10 @@ double Rocket::getAccelerationPerEngineInMetresPerSecondSquare() const {
     return accelerationPerEngineInMetresPerSecondSquare;
 }
 
+double Rocket::getTotalAccelerationInMetresPerSecondSquare() const {
+    return numberOfEngines * accelerationPerEngineInMetresPerSecondSquare;
+}
+
 double Rocket::timeToReachTargetSpeed(const double targetSpeed, const double initialSpeed) const {
     const double rocketAcceleration = numberOfEngines * accelerationPerEngineInMetresPerSecondSquare;
 

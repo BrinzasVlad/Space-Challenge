@@ -52,14 +52,32 @@ TimeUnit::TimeUnit(QString name, QString abbreviation, double ratioToSeconds):
     UnitType<TimeUnit>(name, abbreviation, ratioToSeconds)
 {}
 const TimeUnit TimeUnit::SECONDS("Seconds", "s", 1.0);
+const TimeUnit TimeUnit::MINUTES("Minutes", "m", 60.0);
 const TimeUnit TimeUnit::HOURS("Hours", "h", 3600.0);
 const TimeUnit TimeUnit::DAYS("Days", "d", 86400.0);
 const TimeUnit TimeUnit::YEARS("Years", "y", 31556952.0); // Assuming 365.2425 days per year to account for leap years
 std::vector<TimeUnit> TimeUnit::allValues() {
     return std::vector<TimeUnit>({
         TimeUnit::SECONDS,
+        TimeUnit::MINUTES,
         TimeUnit::HOURS,
         TimeUnit::DAYS,
         TimeUnit::YEARS
+    });
+}
+
+SpeedUnit::SpeedUnit(QString name, QString abbreviation, double ratioToMetresPerSecond):
+    UnitType<SpeedUnit>(name, abbreviation, ratioToMetresPerSecond)
+{}
+const SpeedUnit SpeedUnit::METRES_PER_SECOND("Metres per second", "m/s", 1.0);
+const SpeedUnit SpeedUnit::KILOMETRES_PER_HOUR("Kilometres per hour", "km/h", 0.2778);
+const SpeedUnit SpeedUnit::MILES_PER_HOUR("Miles per hour", "mph", 0.447);
+const SpeedUnit SpeedUnit::KILOMETRES_PER_SECOND("Kilometres per second", "km/s", 1000.0);
+std::vector<SpeedUnit> SpeedUnit::allValues() {
+    return std::vector<SpeedUnit>({
+        SpeedUnit::METRES_PER_SECOND,
+        SpeedUnit::KILOMETRES_PER_HOUR,
+        SpeedUnit::MILES_PER_HOUR,
+        SpeedUnit::KILOMETRES_PER_SECOND
     });
 }

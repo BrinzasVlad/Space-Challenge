@@ -18,6 +18,7 @@ qt_add_executable(Space_Challenge
     escapevelocitiessolutionwidget.h escapevelocitiessolutionwidget.cpp escapevelocitiessolutionwidget.ui
     measurementunits.h measurementunits.cpp
     rocketaccelerationtimesolutionwidget.h rocketaccelerationtimesolutionwidget.cpp rocketaccelerationtimesolutionwidget.ui
+    simplifiedstraightjourneysolutionwidget.h simplifiedstraightjourneysolutionwidget.cpp simplifiedstraightjourneysolutionwidget.ui
 )
 
 # Needs to be added so generated UI headers see promoted widget headers

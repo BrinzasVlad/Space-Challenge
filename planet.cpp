@@ -39,3 +39,7 @@ std::optional<double> Planet::getOrbitalPeriodInDays() const {
 std::optional<double> Planet::getOrbitalRadiusInAU() const {
     return orbitalRadiusInAU;
 }
+
+bool Planet::hasOrbitalData() const {
+    return orbitalPeriodInDays.has_value() && orbitalRadiusInAU.has_value();
+}
