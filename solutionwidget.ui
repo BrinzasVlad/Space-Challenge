@@ -34,7 +34,7 @@
        <string>Stage Three</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="stageFourTab">
+     <widget class="PlanetRotationSolutionWidget" name="stageFourTab">
       <attribute name="title">
        <string>Stage Four</string>
       </attribute>
@@ -70,6 +70,12 @@
    <class>SimplifiedStraightJourneySolutionWidget</class>
    <extends>QWidget</extends>
    <header>simplifiedstraightjourneysolutionwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PlanetRotationSolutionWidget</class>
+   <extends>QWidget</extends>
+   <header>planetrotationsolutionwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
