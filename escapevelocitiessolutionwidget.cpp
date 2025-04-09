@@ -1,6 +1,8 @@
 #include "escapevelocitiessolutionwidget.h"
 #include "ui_escapevelocitiessolutionwidget.h"
 
+#include "orbitalmath.h"
+
 EscapeVelocitiesSolutionWidget::EscapeVelocitiesSolutionWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::EscapeVelocitiesSolutionWidget)
@@ -35,7 +37,7 @@ void EscapeVelocitiesSolutionWidget::setPlanets(const QList<Planet>& newPlanets)
         escapeVelocitiesTableModel->setData(escapeVelocitiesTableModel->index(i, 0),
                                             planet.getName());
         escapeVelocitiesTableModel->setData(escapeVelocitiesTableModel->index(i, 1),
-                                            QString("%1 m/s").arg(planet.getEscapeVelocityInMetresPerSecond()));
+                                            QString("%1 m/s").arg(OrbitalMath::escapeVelocity(planet)));
     }
 
     // Hide or display table as needed

@@ -1,6 +1,8 @@
 #include "planetrotationsolutionwidget.h"
 #include "ui_planetrotationsolutionwidget.h"
 
+#include "orbitalmath.h"
+
 PlanetRotationSolutionWidget::PlanetRotationSolutionWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::PlanetRotationSolutionWidget)
@@ -56,12 +58,7 @@ void PlanetRotationSolutionWidget::updatePlanetRotationTable() {
 
             if (planet.getOrbitalPeriodInDays().has_value()) {
                 // If planet has orbital data, compute angle and insert
-                const double orbitalPeriod = planet.getOrbitalPeriodInDays().value();
-
-                const int fullRotations = (int)(daysElapsed / orbitalPeriod);
-                const double partialRotations = (daysElapsed - fullRotations * orbitalPeriod) / orbitalPeriod;
-
-                const double planetAngle = 360 * partialRotations;
+                const double planetAngle = OrbitalMath::angularPositionAfterDays(planet, daysElapsed);
                 planetRotationTableModel->setData(planetRotationTableModel->index(i, 1), QString("%1°").arg(planetAngle));
             }
             else {
@@ -70,7 +67,4 @@ void PlanetRotationSolutionWidget::updatePlanetRotationTable() {
             }
         }
     }
-    // Check that we have valid planet data to work with
-    // Fetch value of days elapsed for each planet
-    // Compute current angular position as 360° * (daysElapsed % orbitalPeriod) / orbitalPeriod for each planet and insert into table
 }

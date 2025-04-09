@@ -135,4 +135,16 @@ public:
     static std::vector<SpeedUnit> allValues();
 };
 
+
+class AngleUnit : public UnitType<AngleUnit> {
+private:
+    AngleUnit(QString name, QString abbreviation, double ratioToDegrees);
+    friend class UnitType<AngleUnit>; // Needed to allow UnitType to define INVALID
+
+public:
+    static const AngleUnit DEGREES;
+    static const AngleUnit RADIANS;
+    static std::vector<AngleUnit> allValues();
+};
+
 #endif // MEASUREMENTUNITS_H

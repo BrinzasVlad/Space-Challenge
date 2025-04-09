@@ -2,6 +2,7 @@
 #include "ui_simplifiedstraightjourneysolutionwidget.h"
 
 #include "measurementunits.h"
+#include "orbitalmath.h"
 
 SimplifiedStraightJourneySolutionWidget::SimplifiedStraightJourneySolutionWidget(QWidget *parent)
     : QWidget(parent)
@@ -160,55 +161,31 @@ void SimplifiedStraightJourneySolutionWidget::updateResultsDisplay() {
 
     // Compute all the needed values
     // Work with all values in SI, convert to desired units at the end
-    double closestDistanceBetweenPlanets = DistanceUnit::convert(
-        std::abs(fromPlanet->getOrbitalRadiusInAU().value() - toPlanet->getOrbitalRadiusInAU().value()),
-        DistanceUnit::AU,
-        DistanceUnit::METRES
-    );
-    double cruisingVelocity = std::max(
-        fromPlanet->getEscapeVelocityInMetresPerSecond(),
-        toPlanet->getEscapeVelocityInMetresPerSecond()
-    );
-    double accelerationTime = rocket->timeToReachTargetSpeed(cruisingVelocity);
-    double accelerationDistance = computeDistance(
-        0, // Start from initial speed zero
-        rocket->getTotalAccelerationInMetresPerSecondSquare(),
-        accelerationTime
-    );
-    double decelerationTime = accelerationTime;
-    double decelerationDistance = accelerationDistance;
-    double cruisingDistance = closestDistanceBetweenPlanets
-                              - fromPlanet->getRadiusInMetres()
-                              - accelerationDistance
-                              - decelerationDistance
-                              - toPlanet->getRadiusInMetres();
-    double cruisingTime = cruisingDistance / cruisingVelocity;
-    double totalJourneyTime = accelerationTime + cruisingTime + decelerationTime;
+    OrbitalMath::TransferResults transferResults = OrbitalMath::computeSimpleTransfer(*fromPlanet, *toPlanet, *rocket);
+    double closestDistanceBetweenPlanetsInAU = OrbitalMath::shortestDistance(*fromPlanet, *toPlanet);
 
     // Then insert into UI
     QString newResultsText = textDisplayTemplate; // Make a copy
     newResultsText
         .replace("{fromPlanet}", fromPlanetName)
         .replace("{toPlanet}", toPlanetName)
-        .replace("{closestDistance}", QString::number(
-            DistanceUnit::convert(closestDistanceBetweenPlanets, DistanceUnit::METRES, DistanceUnit::AU)
-        ))
-        .replace("{cruisingVelocityM/S}", QString::number(cruisingVelocity))
+        .replace("{closestDistance}", QString::number(closestDistanceBetweenPlanetsInAU))
+        .replace("{cruisingVelocityM/S}", QString::number(transferResults.cruisingVelocity))
         .replace("{cruisingVelocityKm/S}", QString::number(
-            SpeedUnit::convert(cruisingVelocity, SpeedUnit::METRES_PER_SECOND, SpeedUnit::METRES_PER_SECOND)
+            SpeedUnit::convert(transferResults.cruisingVelocity, SpeedUnit::METRES_PER_SECOND, SpeedUnit::KILOMETRES_PER_SECOND)
         ))
-        .replace("{accelerationTime}", QString::number(accelerationTime))
+        .replace("{accelerationTime}", QString::number(transferResults.accelerationTime))
         .replace("{accelerationDistance}", QString::number(
-            DistanceUnit::convert(accelerationDistance, DistanceUnit::METRES, DistanceUnit::KILOMETRES)
+            DistanceUnit::convert(transferResults.accelerationDistance, DistanceUnit::METRES, DistanceUnit::KILOMETRES)
         ))
-        .replace("{cruisingTime}", QString::number(cruisingTime))
-        .replace("{cruisingTimeFormatted}", formatTime(cruisingTime))
+        .replace("{cruisingTime}", QString::number(transferResults.cruisingTime))
+        .replace("{cruisingTimeFormatted}", formatTime(transferResults.cruisingTime))
         .replace("{decelerationDistance}", QString::number(
-            DistanceUnit::convert(decelerationDistance, DistanceUnit::METRES, DistanceUnit::KILOMETRES)
+            DistanceUnit::convert(transferResults.decelerationDistance, DistanceUnit::METRES, DistanceUnit::KILOMETRES)
         ))
-        .replace("{decelerationTime}", QString::number(decelerationTime))
-        .replace("{totalJourneyTime}", QString::number(totalJourneyTime))
-        .replace("{totalJourneyTimeFormatted}", formatTime(totalJourneyTime));
+        .replace("{decelerationTime}", QString::number(transferResults.decelerationTime))
+        .replace("{totalJourneyTime}", QString::number(transferResults.totalTravelTime))
+        .replace("{totalJourneyTimeFormatted}", formatTime(transferResults.totalTravelTime));
     // Note: the above is probably quite inefficient
     // We could make this more efficient by:
     // 1. assembling the string out of parts rather than replacing parts

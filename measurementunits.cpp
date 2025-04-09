@@ -81,3 +81,9 @@ std::vector<SpeedUnit> SpeedUnit::allValues() {
         SpeedUnit::KILOMETRES_PER_SECOND
     });
 }
+
+AngleUnit::AngleUnit(QString name, QString abbreviation, double ratioToDegrees):
+    UnitType<AngleUnit>(name, abbreviation, ratioToDegrees)
+{}
+const AngleUnit AngleUnit::DEGREES("Degrees", "°", 1.0); // Use degrees as default because application does too
+const AngleUnit AngleUnit::RADIANS("Radians", "rad", 57.295779513);

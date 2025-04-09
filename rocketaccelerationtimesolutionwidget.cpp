@@ -1,6 +1,9 @@
 #include "rocketaccelerationtimesolutionwidget.h"
 #include "ui_rocketaccelerationtimesolutionwidget.h"
 
+#include "measurementunits.h"
+#include "orbitalmath.h"
+
 RocketAccelerationTimeSolutionWidget::RocketAccelerationTimeSolutionWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::RocketAccelerationTimeSolutionWidget)
@@ -20,13 +23,6 @@ RocketAccelerationTimeSolutionWidget::~RocketAccelerationTimeSolutionWidget()
 {
     delete rocketAccelerationTimeTableModel;
     delete ui;
-}
-
-namespace {
-    double computeDistance(const double initialVelocity, const double acceleration, const double time) {
-        // We have d = vt + at²/2
-        return initialVelocity * time + acceleration * time * time / 2;
-    }
 }
 
 void RocketAccelerationTimeSolutionWidget::setPlanets(const QList<Planet>& newPlanets) {
@@ -50,10 +46,10 @@ void RocketAccelerationTimeSolutionWidget::updateRocketAccelerationTimeTable() {
 
         // Populate table
         for (int i = 0; i < planets->length(); ++i) {
-            double rocketTimeToEscapeVelocity = rocket->timeToReachTargetSpeed((*planets)[i].getEscapeVelocityInMetresPerSecond());
+            double planetEscapeVelocity = OrbitalMath::escapeVelocity( (*planets)[i] );
 
-            double rocketAcceleration = rocket->getNumberOfEngines() * rocket->getAccelerationPerEngineInMetresPerSecondSquare();
-            double rocketDistanceToEscapeVelocity = computeDistance(0, rocketAcceleration, rocketTimeToEscapeVelocity);
+            OrbitalMath::AccelerationResult rocketAccelerationStats
+                = OrbitalMath::computeAccelerationValues(*rocket, planetEscapeVelocity);
 
             rocketAccelerationTimeTableModel->setData(
                 rocketAccelerationTimeTableModel->index(i, 0),
@@ -61,15 +57,19 @@ void RocketAccelerationTimeSolutionWidget::updateRocketAccelerationTimeTable() {
                 );
             rocketAccelerationTimeTableModel->setData(
                 rocketAccelerationTimeTableModel->index(i, 1),
-                QString("%1 m/s").arg((*planets)[i].getEscapeVelocityInMetresPerSecond())
+                QString("%1 m/s").arg(planetEscapeVelocity)
                 );
             rocketAccelerationTimeTableModel->setData(
                 rocketAccelerationTimeTableModel->index(i, 2),
-                QString("%1 s").arg(rocketTimeToEscapeVelocity)
+                QString("%1 s").arg(rocketAccelerationStats.accelerationTime)
                 );
             rocketAccelerationTimeTableModel->setData(
                 rocketAccelerationTimeTableModel->index(i, 3),
-                QString("%1 m").arg(rocketDistanceToEscapeVelocity)
+                QString("%1 km").arg(DistanceUnit::convert(
+                                         rocketAccelerationStats.accelerationDistance,
+                                         DistanceUnit::METRES,
+                                         DistanceUnit::KILOMETRES
+                                     ))
                 );
         }
 
