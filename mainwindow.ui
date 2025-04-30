@@ -17,13 +17,13 @@
    <property name="layoutDirection">
     <enum>Qt::LayoutDirection::LeftToRight</enum>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,2">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="5,3">
     <item>
      <widget class="SolutionWidget" name="solutionWidget" native="true"/>
     </item>
     <item>
      <widget class="QWidget" name="dataWidget" native="true">
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,2,1">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0">
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
