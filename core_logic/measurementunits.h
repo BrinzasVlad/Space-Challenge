@@ -119,6 +119,16 @@ public:
     static const TimeUnit DAYS;
     static const TimeUnit YEARS;
     static std::vector<TimeUnit> allValues();
+
+    /**
+      * Formats the given time quantity in a
+      * "__y  __d  __h  __m  __s" format, using the
+      * minimum number of entries necessary.
+      *
+      * I.e. 68 seconds will be formatted as "1m 8s", while
+      * 3727 secods will be formatted as "1h 2m 7s".
+      */
+    static QString formatTime(double totalTime, TimeUnit timeUnit = SECONDS);
 };
 
 

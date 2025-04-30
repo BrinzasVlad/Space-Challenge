@@ -10,17 +10,18 @@ qt_add_executable(Space_Challenge
     main.cpp
     mainwindow.h mainwindow.cpp mainwindow.ui
     planetswidget.h planetswidget.cpp planetswidget.ui
-    planet.h planet.cpp
     rocketwidget.h rocketwidget.cpp rocketwidget.ui
-    rocket.h rocket.cpp
-    dialogutils.h dialogutils.cpp
     solutionwidget.h solutionwidget.cpp solutionwidget.ui
-    escapevelocitiessolutionwidget.h escapevelocitiessolutionwidget.cpp escapevelocitiessolutionwidget.ui
-    measurementunits.h measurementunits.cpp
-    rocketaccelerationtimesolutionwidget.h rocketaccelerationtimesolutionwidget.cpp rocketaccelerationtimesolutionwidget.ui
-    simplifiedstraightjourneysolutionwidget.h simplifiedstraightjourneysolutionwidget.cpp simplifiedstraightjourneysolutionwidget.ui
-    planetrotationsolutionwidget.h planetrotationsolutionwidget.cpp planetrotationsolutionwidget.ui
-    orbitalmath.h orbitalmath.cpp
+    dialogutils.h dialogutils.cpp
+    core_logic/planet.h core_logic/planet.cpp
+    core_logic/rocket.h core_logic/rocket.cpp
+    core_logic/orbitalmath.h core_logic/orbitalmath.cpp
+    core_logic/measurementunits.h core_logic/measurementunits.cpp
+    solution_widgets/escapevelocitiessolutionwidget.h solution_widgets/escapevelocitiessolutionwidget.cpp solution_widgets/escapevelocitiessolutionwidget.ui
+    solution_widgets/rocketaccelerationtimesolutionwidget.h solution_widgets/rocketaccelerationtimesolutionwidget.cpp solution_widgets/rocketaccelerationtimesolutionwidget.ui
+    solution_widgets/simplifiedstraightjourneysolutionwidget.h solution_widgets/simplifiedstraightjourneysolutionwidget.cpp solution_widgets/simplifiedstraightjourneysolutionwidget.ui
+    solution_widgets/planetrotationsolutionwidget.h solution_widgets/planetrotationsolutionwidget.cpp solution_widgets/planetrotationsolutionwidget.ui
+    solution_widgets/statictransfersolutionwidget.h solution_widgets/statictransfersolutionwidget.cpp solution_widgets/statictransfersolutionwidget.ui
 )
 
 # Needs to be added so generated UI headers see promoted widget headers

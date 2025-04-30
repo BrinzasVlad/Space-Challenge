@@ -205,8 +205,8 @@ Please {issueSolutionText} to continue.</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>776</width>
-                <height>508</height>
+                <width>278</width>
+                <height>822</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">

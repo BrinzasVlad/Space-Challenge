@@ -1,7 +1,7 @@
 #ifndef ESCAPEVELOCITIESSOLUTIONWIDGET_H
 #define ESCAPEVELOCITIESSOLUTIONWIDGET_H
 
-#include "planet.h"
+#include "core_logic/planet.h"
 
 #include <QWidget>
 #include <QStandardItemModel>

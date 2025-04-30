@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-#include "planet.h"
-#include "rocket.h"
+#include "core_logic/planet.h"
+#include "core_logic/rocket.h"
 
 namespace Ui {
 class SimplifiedStraightJourneySolutionWidget;

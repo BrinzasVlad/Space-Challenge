@@ -1,7 +1,7 @@
 #include "rocketwidget.h"
 #include "ui_rocketwidget.h"
 #include "dialogutils.h"
-#include "measurementunits.h"
+#include "core_logic/measurementunits.h"
 
 #include <QFileDialog>
 #include <QMessageBox>

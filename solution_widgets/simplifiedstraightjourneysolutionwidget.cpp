@@ -1,8 +1,8 @@
 #include "simplifiedstraightjourneysolutionwidget.h"
 #include "ui_simplifiedstraightjourneysolutionwidget.h"
 
-#include "measurementunits.h"
-#include "orbitalmath.h"
+#include "core_logic/measurementunits.h"
+#include "core_logic/orbitalmath.h"
 
 SimplifiedStraightJourneySolutionWidget::SimplifiedStraightJourneySolutionWidget(QWidget *parent)
     : QWidget(parent)
@@ -38,36 +38,6 @@ namespace {
     const auto NO_ROCKET_DATA("No rocket data loaded.\nPlease load rocket data from the side panel to continue.");
     const auto SAME_PLANET("Same planet selected as both origin and destination.\nPlease select two different planets to continue.");
     const auto INVALID_PLANET("Invalid planet selected: %1.\nPlease select a valid planet from the options list to continue.");
-
-    double computeDistance(const double initialVelocity, const double acceleration, const double time) {
-        // We have d = vt + at²/2
-        return initialVelocity * time + acceleration * time * time / 2;
-    }
-
-    QString formatTime(const double timeInSeconds) {
-        static const int SECONDS_PER_DAY = TimeUnit::convert(1, TimeUnit::DAYS, TimeUnit::SECONDS);
-        static const int SECONDS_PER_HOUR = TimeUnit::convert(1, TimeUnit::HOURS, TimeUnit::SECONDS);
-        static const int SECONDS_PER_MINUTE = TimeUnit::convert(1, TimeUnit::MINUTES, TimeUnit::SECONDS);
-
-        double remainingSeconds = timeInSeconds;
-
-        int days = (int)(remainingSeconds / SECONDS_PER_DAY);
-        remainingSeconds -= days * SECONDS_PER_DAY;
-
-        int hours = (int)(remainingSeconds / SECONDS_PER_HOUR);
-        remainingSeconds -= hours * SECONDS_PER_HOUR;
-
-        int minutes = (int)(remainingSeconds / SECONDS_PER_MINUTE);
-        remainingSeconds -= minutes * SECONDS_PER_MINUTE;
-
-        QStringList fragments;
-        if (days) fragments.append(QString("%1 d").arg(days));
-        if (hours) fragments.append(QString("%1 h").arg(hours));
-        if (minutes) fragments.append(QString("%1 m").arg(minutes));
-        if (remainingSeconds) fragments.append(QString("%1 s").arg(remainingSeconds));
-
-        return fragments.join(' ');
-    }
 }
 
 void SimplifiedStraightJourneySolutionWidget::updateDisplayedPage() {
@@ -179,13 +149,13 @@ void SimplifiedStraightJourneySolutionWidget::updateResultsDisplay() {
             DistanceUnit::convert(transferResults.accelerationDistance, DistanceUnit::METRES, DistanceUnit::KILOMETRES)
         ))
         .replace("{cruisingTime}", QString::number(transferResults.cruisingTime))
-        .replace("{cruisingTimeFormatted}", formatTime(transferResults.cruisingTime))
+        .replace("{cruisingTimeFormatted}", TimeUnit::formatTime(transferResults.cruisingTime))
         .replace("{decelerationDistance}", QString::number(
             DistanceUnit::convert(transferResults.decelerationDistance, DistanceUnit::METRES, DistanceUnit::KILOMETRES)
         ))
         .replace("{decelerationTime}", QString::number(transferResults.decelerationTime))
         .replace("{totalJourneyTime}", QString::number(transferResults.totalTravelTime))
-        .replace("{totalJourneyTimeFormatted}", formatTime(transferResults.totalTravelTime));
+        .replace("{totalJourneyTimeFormatted}", TimeUnit::formatTime(transferResults.totalTravelTime));
     // Note: the above is probably quite inefficient
     // We could make this more efficient by:
     // 1. assembling the string out of parts rather than replacing parts

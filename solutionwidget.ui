@@ -57,25 +57,25 @@
   <customwidget>
    <class>EscapeVelocitiesSolutionWidget</class>
    <extends>QWidget</extends>
-   <header>escapevelocitiessolutionwidget.h</header>
+   <header>solution_widgets/escapevelocitiessolutionwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>RocketAccelerationTimeSolutionWidget</class>
    <extends>QWidget</extends>
-   <header>rocketaccelerationtimesolutionwidget.h</header>
+   <header>solution_widgets/rocketaccelerationtimesolutionwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SimplifiedStraightJourneySolutionWidget</class>
    <extends>QWidget</extends>
-   <header>simplifiedstraightjourneysolutionwidget.h</header>
+   <header>solution_widgets/simplifiedstraightjourneysolutionwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>PlanetRotationSolutionWidget</class>
    <extends>QWidget</extends>
-   <header>planetrotationsolutionwidget.h</header>
+   <header>solution_widgets/planetrotationsolutionwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -1,7 +1,7 @@
 #include "escapevelocitiessolutionwidget.h"
 #include "ui_escapevelocitiessolutionwidget.h"
 
-#include "orbitalmath.h"
+#include "core_logic/orbitalmath.h"
 
 EscapeVelocitiesSolutionWidget::EscapeVelocitiesSolutionWidget(QWidget *parent)
     : QWidget(parent)

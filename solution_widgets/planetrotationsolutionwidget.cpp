@@ -1,7 +1,7 @@
 #include "planetrotationsolutionwidget.h"
 #include "ui_planetrotationsolutionwidget.h"
 
-#include "orbitalmath.h"
+#include "core_logic/orbitalmath.h"
 
 PlanetRotationSolutionWidget::PlanetRotationSolutionWidget(QWidget *parent)
     : QWidget(parent)

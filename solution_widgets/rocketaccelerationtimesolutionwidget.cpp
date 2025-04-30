@@ -1,8 +1,8 @@
 #include "rocketaccelerationtimesolutionwidget.h"
 #include "ui_rocketaccelerationtimesolutionwidget.h"
 
-#include "measurementunits.h"
-#include "orbitalmath.h"
+#include "core_logic/measurementunits.h"
+#include "core_logic/orbitalmath.h"
 
 RocketAccelerationTimeSolutionWidget::RocketAccelerationTimeSolutionWidget(QWidget *parent)
     : QWidget(parent)

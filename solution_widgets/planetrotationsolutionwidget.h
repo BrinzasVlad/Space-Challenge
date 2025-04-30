@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QStandardItemModel>
 
-#include "planet.h"
+#include "core_logic/planet.h"
 
 namespace Ui {
 class PlanetRotationSolutionWidget;

@@ -1,7 +1,7 @@
 #include "planetswidget.h"
 #include "ui_planetswidget.h"
 #include "dialogutils.h"
-#include "measurementunits.h"
+#include "core_logic/measurementunits.h"
 
 #include <QFileDialog>
 #include <QMessageBox>

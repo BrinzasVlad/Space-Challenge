@@ -1,3 +1,4 @@
+#include <QStringList>
 #include "measurementunits.h"
 
 DistanceUnit::DistanceUnit(QString name, QString abbreviation, double ratioToMetres):
@@ -64,6 +65,35 @@ std::vector<TimeUnit> TimeUnit::allValues() {
         TimeUnit::DAYS,
         TimeUnit::YEARS
     });
+}
+QString TimeUnit::formatTime(double totalTime, TimeUnit timeUnit) {
+    static const int SECONDS_PER_DAY = TimeUnit::convert(1, TimeUnit::DAYS, TimeUnit::SECONDS);
+    static const int SECONDS_PER_HOUR = TimeUnit::convert(1, TimeUnit::HOURS, TimeUnit::SECONDS);
+    static const int SECONDS_PER_MINUTE = TimeUnit::convert(1, TimeUnit::MINUTES, TimeUnit::SECONDS);
+    static const int SECOND_PER_YEAR = TimeUnit::convert(1, TimeUnit::YEARS, TimeUnit::SECONDS);
+
+    double remainingSeconds = TimeUnit::convert(totalTime, timeUnit, TimeUnit::SECONDS);
+
+    int years = (int)(remainingSeconds / SECOND_PER_YEAR);
+    remainingSeconds -= years * SECOND_PER_YEAR;
+
+    int days = (int)(remainingSeconds / SECONDS_PER_DAY);
+    remainingSeconds -= days * SECONDS_PER_DAY;
+
+    int hours = (int)(remainingSeconds / SECONDS_PER_HOUR);
+    remainingSeconds -= hours * SECONDS_PER_HOUR;
+
+    int minutes = (int)(remainingSeconds / SECONDS_PER_MINUTE);
+    remainingSeconds -= minutes * SECONDS_PER_MINUTE;
+
+    QStringList fragments;
+    if (years) fragments.append(QString("%1 y").arg(years));
+    if (days) fragments.append(QString("%1 d").arg(days));
+    if (hours) fragments.append(QString("%1 h").arg(hours));
+    if (minutes) fragments.append(QString("%1 m").arg(minutes));
+    if (remainingSeconds) fragments.append(QString("%1 s").arg(remainingSeconds));
+
+    return fragments.join(' ');
 }
 
 SpeedUnit::SpeedUnit(QString name, QString abbreviation, double ratioToMetresPerSecond):

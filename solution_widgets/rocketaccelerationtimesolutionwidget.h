@@ -1,8 +1,8 @@
 #ifndef ROCKETACCELERATIONTIMESOLUTIONWIDGET_H
 #define ROCKETACCELERATIONTIMESOLUTIONWIDGET_H
 
-#include "planet.h"
-#include "rocket.h"
+#include "core_logic/planet.h"
+#include "core_logic/rocket.h"
 
 #include <QWidget>
 #include <QStandardItemModel>

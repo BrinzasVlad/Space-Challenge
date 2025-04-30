@@ -1,7 +1,7 @@
 #ifndef PLANETSWIDGET_H
 #define PLANETSWIDGET_H
 
-#include "planet.h"
+#include "core_logic/planet.h"
 
 #include <QWidget>
 #include <QStandardItemModel>

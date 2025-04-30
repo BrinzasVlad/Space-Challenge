@@ -1,7 +1,7 @@
 #ifndef ROCKETWIDGET_H
 #define ROCKETWIDGET_H
 
-#include "rocket.h"
+#include "core_logic/rocket.h"
 
 #include <QWidget>
 
